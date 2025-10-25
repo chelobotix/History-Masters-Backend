@@ -3,11 +3,11 @@ package handlers
 import (
 	"net/http"
 
-	"github.com/labstack/echo"
+	"github.com/labstack/echo/v4"
 )
 
 type EventHandler interface {
-	GetEvents(c echo.Context) error
+	GetAll(c echo.Context) error
 }
 
 type eventHandler struct{}
@@ -16,7 +16,7 @@ func NewEventHandler() EventHandler {
 	return &eventHandler{}
 }
 
-func (eh *eventHandler) GetEvents(c echo.Context) error {
+func (eh *eventHandler) GetAll(c echo.Context) error {
 	return c.JSON(http.StatusOK, map[string]any{
 		"status": "ok",
 	})

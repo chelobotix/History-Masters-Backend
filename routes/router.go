@@ -3,24 +3,17 @@ package routes
 import (
 	"myapp/internal/handlers"
 
-	"github.com/labstack/echo"
+	"github.com/labstack/echo/v4"
 )
 
-type HandlerRegistry struct {
-	Event handlers.EventHandler
-}
-
-func newHandlers() *handlers_struct {
-	return &handlers_struct{
-		Event: handlers.NewEventHandler(),
-	}
-}
-
 func ConfigRoutes(e *echo.Echo) {
-	h := newHandlers()
+	h := handlers.NewHandlersInit()
 	api := e.Group("/api/v1")
 
+	// Health
+	api.GET("/health", h.Health.ServerHealth)
+
 	// Event
-	api.GET("/events", h.Event.GetEvents)
+	api.GET("/events", h.Event.GetAll)
 
 }
