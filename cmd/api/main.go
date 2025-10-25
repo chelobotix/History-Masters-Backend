@@ -1,6 +1,8 @@
 package main
 
 import (
+	"log"
+	"myapp/config"
 	"myapp/routes"
 	"os"
 
@@ -13,7 +15,14 @@ func main() {
 	e := echo.New()
 	e.Use(middleware.Logger())
 
-	routes.ConfigRoutes(e)
+	// Config
+	db, err := config.NewConfig(e)
+	if err != nil {
+		log.Panic(err)
+		return
+	}
+
+	routes.ConfigRoutes(e, db)
 
 	e.Logger.Fatal(e.Start(os.Getenv("SERVER_PORT")))
 }

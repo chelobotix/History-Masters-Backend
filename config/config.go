@@ -1,87 +1,26 @@
-// package config
+package config
 
-// import (
-// 	"calculadora_rico/internal/database"
-// 	"calculadora_rico/internal/services/error_handler_service"
-// 	"calculadora_rico/internal/services/logger_service"
-// 	"calculadora_rico/internal/services/updater_service"
-// 	"context"
-// 	"fmt"
-// 	_ "github.com/joho/godotenv/autoload"
-// 	"github.com/labstack/echo/v4"
-// 	"github.com/labstack/echo/v4/middleware"
-// 	"github.com/labstack/gommon/log"
-// 	"github.com/redis/go-redis/v9"
-// 	"github.com/robfig/cron"
-// 	"go.uber.org/zap"
-// 	"golang.org/x/time/rate"
-// 	"gorm.io/gorm"
-// 	"net/http"
-// 	"os"
-// 	"time"
-// )
+import (
+	"fmt"
+	"myapp/internal/database"
 
-// func NewConfig(
-// 	e *echo.Echo,
-// ) (
-// 	*gorm.DB,
-// 	*redis.Client,
-// 	*zap.Logger,
-// 	error_handler_service.ErrorHandler,
-// 	error,
-// ) {
-// 	// Zap Logger
-// 	logger, err := logger_service.NewZapLogger(e)
-// 	if err != nil {
-// 		log.Panic(err)
-// 		return nil, nil, nil, nil, err
-// 	}
+	_ "github.com/joho/godotenv/autoload"
+	"github.com/labstack/echo/v4"
+	"gorm.io/gorm"
+)
 
-// 	// ErrorHandler Service
-// 	errorHandler, err := error_handler_service.New(logger)
-// 	if err != nil {
-// 		return nil, nil, nil, nil, err
-// 	}
+func NewConfig(e *echo.Echo) (*gorm.DB, error) {
+	// DB Connection
+	db, err := database.NewConnection()
+	if err != nil {
+		return nil, err
+	}
 
-// 	// DB Connection
-// 	db, err := database.NewConnection()
-// 	if err != nil {
-// 		return nil, nil, nil, nil, err
-// 	}
+	fmt.Println("connected to DB")
 
-// 	// Redis Connection
-// 	redisDB := redis.NewClient(&redis.Options{
-// 		Addr:     os.Getenv("REDIS_URL"),
-// 		Password: "",
-// 		DB:       0,
-// 	})
+	return db, nil
 
-// 	err = testRedis(redisDB, logger)
-// 	if err != nil {
-// 		return nil, nil, nil, nil, err
-// 	}
-
-// 	// Migrate DB
-// 	err = database.AutoMigrate(db)
-// 	if err != nil {
-// 		return nil, nil, nil, nil, err
-// 	}
-
-// 	// Create Fixtures
-// 	err = database.LoadFixtures(db)
-// 	if err != nil {
-// 		return nil, nil, nil, nil, err
-// 	}
-
-// 	// Middlewares
-// 	startMiddlewares(e)
-
-// 	// Cron Jobs
-// 	c := cron.New()
-// 	cronJobs(db, c, logger)
-
-// 	return db, redisDB, logger, errorHandler, err
-// }
+}
 
 // func startMiddlewares(e *echo.Echo) {
 // 	e.Use(middleware.Logger())
