@@ -54,7 +54,7 @@ func NewZapLogger(e *echo.Echo) (*zap.Logger, error) {
 		ErrorOutputPaths: []string{"stderr"},
 	}
 
-	logger, err := config.Build(zap.AddCallerSkip(1))
+	logger, err := config.Build(zap.AddCaller())
 	if err != nil {
 		return nil, err
 	}

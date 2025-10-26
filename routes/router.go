@@ -9,7 +9,7 @@ import (
 )
 
 func ConfigRoutes(e *echo.Echo, db *gorm.DB, logger *zap.Logger) {
-	h := handlers.NewHandlersInit(db)
+	h := handlers.NewHandlersInit(db, logger)
 	api := e.Group("/api/v1")
 
 	// Health
