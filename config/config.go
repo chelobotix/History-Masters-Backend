@@ -2,23 +2,33 @@ package config
 
 import (
 	"fmt"
+	"log"
 	"myapp/internal/database"
+	service "myapp/internal/services"
 
 	_ "github.com/joho/godotenv/autoload"
 	"github.com/labstack/echo/v4"
+	"go.uber.org/zap"
 	"gorm.io/gorm"
 )
 
-func NewConfig(e *echo.Echo) (*gorm.DB, error) {
+func NewConfig(e *echo.Echo) (*gorm.DB, *zap.Logger, error) {
 	// DB Connection
 	db, err := database.NewConnection()
 	if err != nil {
-		return nil, err
+		return nil, nil, err
 	}
 
-	fmt.Println("connected to DB")
+	fmt.Println("Connected to Data Base Succesfully!")
 
-	return db, nil
+	// Zap Logger
+	logger, err := service.NewZapLogger(e)
+	if err != nil {
+		log.Panic(err)
+		return nil, nil, err
+	}
+
+	return db, logger, nil
 
 }
 

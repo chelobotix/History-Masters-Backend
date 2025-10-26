@@ -8,21 +8,19 @@ import (
 
 	_ "github.com/joho/godotenv/autoload"
 	"github.com/labstack/echo/v4"
-	"github.com/labstack/echo/v4/middleware"
 )
 
 func main() {
 	e := echo.New()
-	e.Use(middleware.Logger())
 
 	// Config
-	db, err := config.NewConfig(e)
+	db, logger, err := config.NewConfig(e)
 	if err != nil {
 		log.Panic(err)
 		return
 	}
 
-	routes.ConfigRoutes(e, db)
+	routes.ConfigRoutes(e, db, logger)
 
 	e.Logger.Fatal(e.Start(os.Getenv("SERVER_PORT")))
 }

@@ -24,7 +24,7 @@ func NewConnection() (*gorm.DB, error) {
 	dbPort := os.Getenv("DB_PORT")
 
 	if dbPort == "" {
-		dbPort = "5432" // Default port if not specified
+		dbPort = "5432"
 	}
 
 	// Connect to DB
