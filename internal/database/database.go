@@ -2,14 +2,21 @@ package database
 
 import (
 	"fmt"
+	"log"
 	"os"
 
+	"github.com/joho/godotenv"
 	_ "github.com/joho/godotenv/autoload"
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
 
 func NewConnection() (*gorm.DB, error) {
+	err := godotenv.Load(".env")
+	if err != nil {
+		log.Println("Warning: .env file not found, skipping load")
+	}
+
 	dbName := os.Getenv("DB_NAME")
 	dbUser := os.Getenv("DB_USER")
 	dbPassword := os.Getenv("DB_PASSWORD")
