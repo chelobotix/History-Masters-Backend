@@ -6,17 +6,17 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-type EventHandler interface {
+type FigureHandler interface {
 	GetAll(c echo.Context) error
 }
 
-type eventHandler struct{}
+type figureHandler struct{}
 
-func NewEventHandler() EventHandler {
-	return &eventHandler{}
+func NewFigureHandler() FigureHandler {
+	return &figureHandler{}
 }
 
-func (eh *eventHandler) GetAll(c echo.Context) error {
+func (fh *figureHandler) GetAll(c echo.Context) error {
 	return c.JSON(http.StatusOK, map[string]any{
 		"status": "ok",
 	})

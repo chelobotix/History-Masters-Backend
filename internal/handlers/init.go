@@ -7,12 +7,12 @@ import (
 
 type HandlersInit struct {
 	Health HealthHandler
-	Event  EventHandler
+	Figure FigureHandler
 }
 
 func NewHandlersInit(db *gorm.DB, logger *zap.Logger) *HandlersInit {
 	return &HandlersInit{
 		Health: NewHealthHandler(logger),
-		Event:  NewEventHandler(),
+		Figure: NewFigureHandler(),
 	}
 }

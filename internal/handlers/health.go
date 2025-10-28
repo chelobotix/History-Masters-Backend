@@ -22,7 +22,6 @@ func NewHealthHandler(logger *zap.Logger) HealthHandler {
 }
 
 func (h *healthHandler) ServerHealth(c echo.Context) error {
-	h.Logger.Info("visitanto el health")
 	return c.JSON(http.StatusOK, map[string]any{
 		"server": "live",
 	})
