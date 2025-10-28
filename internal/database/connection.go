@@ -3,6 +3,8 @@ package database
 import (
 	"fmt"
 	"log"
+	"myapp/internal/database/migrations"
+	"myapp/internal/database/seeds"
 	"os"
 
 	"github.com/joho/godotenv"
@@ -34,32 +36,22 @@ func NewConnection() (*gorm.DB, error) {
 		return nil, err
 	}
 
-	err = Migrate(db)
+	// Migrations
+	err = migrations.Migrate(db)
 	if err != nil {
 		return nil, err
 	}
 
+	// Seeds
+	loadSeeds(db)
+
 	return db, nil
 }
 
-func LoadFixtures(db *gorm.DB) error {
-	// var count int64
-	// db.Model(&models.EconomyIndexer{}).Count(&count)
-	// if count > 0 {
-	// 	log.Println("Skipping fixture loading: economy_indexers already exists.")
-	// 	return nil
-	// }
-
-	// economyIndexers := []models.EconomyIndexer{
-	// 	{Name: "CDI", Value: decimal.NewFromFloat(0.1088)},
-	// 	{Name: "CDI_ACUMULADO", Value: decimal.NewFromFloat(0.1088)},
-	// 	{Name: "SELIC", Value: decimal.NewFromFloat(0.1225)},
-	// 	{Name: "IPCA", Value: decimal.NewFromFloat(0.0483)},
-	// }
-
-	// if err := db.Create(&economyIndexers).Error; err != nil {
-	// 	return err
-	// }
-
-	return nil
+func loadSeeds(db *gorm.DB) {
+	seeds.CountrySeeds(db)
+	seeds.YearSeeds(db)
+	seeds.HistoricalEraSeeds(db)
+	seeds.ProfessionsSeeds(db)
+	seeds.AreaSeeds(db)
 }
