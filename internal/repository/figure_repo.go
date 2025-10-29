@@ -22,12 +22,12 @@ func NewFigureRepository(db *gorm.DB) FigureRepository {
 }
 
 func (fr *figureRepository) GetAll() ([]models.Figure, error) {
-	var figure []models.Figure
+	var figures []models.Figure
 
-	err := fr.DB.Preload(clause.Associations).Find(&figure).Error
+	err := fr.DB.Preload(clause.Associations).Find(&figures).Error
 	if err != nil {
-		return figure, err
+		return figures, err
 	}
 
-	return figure, err
+	return figures, nil
 }
