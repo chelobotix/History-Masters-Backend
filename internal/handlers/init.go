@@ -13,6 +13,6 @@ type HandlersInit struct {
 func NewHandlersInit(db *gorm.DB, logger *zap.Logger) *HandlersInit {
 	return &HandlersInit{
 		Health: NewHealthHandler(logger),
-		Figure: NewFigureHandler(),
+		Figure: NewFigureHandler(db, logger),
 	}
 }

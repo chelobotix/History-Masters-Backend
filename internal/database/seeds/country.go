@@ -9,13 +9,13 @@ import (
 	"gorm.io/gorm"
 )
 
-func CountrySeeds(db *gorm.DB) error {
+func CountrySeeds(db *gorm.DB) {
 	var count int64
 
 	db.Model(&models.Country{}).Count(&count)
 	if count > 0 {
 		log.Println("Skipping fixture loading: country already exists.")
-		return nil
+		return
 	}
 
 	data, err := os.ReadFile("internal/database/seeds/json/countries.json")
@@ -29,10 +29,8 @@ func CountrySeeds(db *gorm.DB) error {
 	}
 
 	if err := db.Create(&countries).Error; err != nil {
-		return err
+		panic(err)
 	} else {
 		log.Println("Fixture loading: country seed created.")
 	}
-
-	return nil
 }
