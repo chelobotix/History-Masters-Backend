@@ -12,10 +12,13 @@ func ConfigRoutes(e *echo.Echo, db *gorm.DB, logger *zap.Logger) {
 	h := handlers.NewHandlersInit(db, logger)
 	api := e.Group("/api/v1")
 
+	// Root
+	e.GET("/", h.Health.ServerHealth)
+
 	// Health
 	api.GET("/health", h.Health.ServerHealth)
 
-	// Event
-	api.GET("/events", h.Event.GetAll)
+	// Figure
+	api.GET("/figures", h.Figure.GetAll)
 
 }
