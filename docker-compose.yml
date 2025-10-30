@@ -1,0 +1,85 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: go-history-postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: history_masters_dev
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data # Scripts de inicialización si existen
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - app-network
+
+  # MODO 1: Desarrollo con Hot Reload (Air)
+  app-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: go-history-dev
+    profiles: ["dev"]  # Activar con: docker compose --profile dev up
+    command: air -c .air.toml
+    ports:
+      - "4000:4000"
+    environment:
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
+      - DB_NAME=history_masters_dev
+      - ENV=development
+      - CGO_ENABLED=0
+    volumes:
+      - ./:/app  # Montar código para hot-reload
+      - go-modules:/go/pkg/mod  # Cache de módulos
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - app-network
+
+  # MODO 2: Debugging con Delve
+  app-debug:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: go-history-debug
+    profiles: ["debug"]  # Activar con: docker-compose --profile debug up
+    command: dlv debug ./cmd/api --headless --listen=:2345 --api-version=2 --accept-multiclient --log
+    ports:
+      - "4000:4000"
+      - "2345:2345"  # Puerto de Delve
+    environment:
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
+      - DB_NAME=history_masters_dev
+      - ENV=development
+    volumes:
+      - ./:/app
+      - go-modules:/go/pkg/mod
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - app-network
+    security_opt:
+      - "apparmor=unconfined"  # Necesario para debugging
+    cap_add:
+      - SYS_PTRACE  # Requerido por Delve
+
+volumes:
+  postgres_data:
+  go-modules:
+
+networks:
+  app-network:
+    driver: bridge

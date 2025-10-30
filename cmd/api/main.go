@@ -4,7 +4,6 @@ import (
 	"log"
 	"myapp/config"
 	"myapp/routes"
-	"os"
 
 	_ "github.com/joho/godotenv/autoload"
 	"github.com/labstack/echo/v4"
@@ -22,5 +21,5 @@ func main() {
 
 	routes.ConfigRoutes(e, db, logger)
 
-	e.Logger.Fatal(e.Start(os.Getenv("SERVER_PORT")))
+	e.Logger.Fatal(e.Start(":4000"))
 }
