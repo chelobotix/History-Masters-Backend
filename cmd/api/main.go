@@ -7,19 +7,20 @@ import (
 
 	_ "github.com/joho/godotenv/autoload"
 	"github.com/labstack/echo/v4"
+	"github.com/spf13/viper"
 )
 
 func main() {
 	e := echo.New()
 
 	// Config
-	db, logger, err := config.NewConfig(e)
+	db, logger, cfg, err := config.NewConfig(e)
 	if err != nil {
 		log.Panic(err)
 		return
 	}
 
-	routes.ConfigRoutes(e, db, logger)
+	routes.ConfigRoutes(e, db, cfg, logger)
 
-	e.Logger.Fatal(e.Start(":4000"))
+	e.Logger.Fatal(e.Start(viper.GetString("server.port")))
 }

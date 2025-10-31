@@ -27,3 +27,5 @@ vendor/
 !env.example
 
 *.log
+
+__debug_bin*

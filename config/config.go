@@ -1,35 +1,64 @@
 package config
 
 import (
-	"fmt"
 	"log"
 	"myapp/internal/database"
 	service "myapp/internal/services"
 
 	_ "github.com/joho/godotenv/autoload"
 	"github.com/labstack/echo/v4"
+	"github.com/spf13/viper"
 	"go.uber.org/zap"
 	"gorm.io/gorm"
 )
 
-func NewConfig(e *echo.Echo) (*gorm.DB, *zap.Logger, error) {
+type ServerConfig struct {
+	Port string
+	Mode string
+}
+
+type Config struct {
+	Server   ServerConfig
+	Database database.DatabaseConfig
+}
+
+func NewConfig(e *echo.Echo) (*gorm.DB, *zap.Logger, *Config, error) {
+	// Load Viper Config
+	cfg := loadViperConfig()
+
 	// DB Connection
 	db, err := database.NewConnection()
 	if err != nil {
-		return nil, nil, err
+		return nil, nil, nil, err
 	}
-
-	fmt.Println("Connected to Data Base Succesfully!")
 
 	// Zap Logger
 	logger, err := service.NewZapLogger(e)
 	if err != nil {
 		log.Panic(err)
-		return nil, nil, err
+		return nil, nil, nil, err
 	}
 
-	return db, logger, nil
+	return db, logger, cfg, nil
 
+}
+
+func loadViperConfig() *Config {
+	viper.SetConfigName("config")
+	viper.SetConfigType("yml")
+	viper.AddConfigPath(".")
+	viper.AutomaticEnv()
+
+	if err := viper.ReadInConfig(); err != nil {
+		log.Panicf("Error loading Viper config file: %v", err)
+	}
+
+	var cfg Config
+	if err := viper.Unmarshal(&cfg); err != nil {
+		log.Panicf("Error parsing Viper config: %v", err)
+	}
+
+	return &cfg
 }
 
 // func startMiddlewares(e *echo.Echo) {

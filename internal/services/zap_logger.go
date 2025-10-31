@@ -96,24 +96,3 @@ func getStatusColor(status int) string {
 		return Blue
 	}
 }
-
-// Función auxiliar para formatear mensajes
-func formatLogMessage(key, value string, color string) string {
-	return fmt.Sprintf("%s%s:%s %s", color, key, Reset, value)
-}
-
-// Función auxiliar para crear un mensaje coloreado
-func colorizedLog(level, msg string) string {
-	switch level {
-	case "ERROR":
-		return fmt.Sprintf("%s%s%s", Red, msg, Reset)
-	case "WARN":
-		return fmt.Sprintf("%s%s%s", Yellow, msg, Reset)
-	case "INFO":
-		return fmt.Sprintf("%s%s%s", Green, msg, Reset)
-	case "DEBUG":
-		return fmt.Sprintf("%s%s%s", Blue, msg, Reset)
-	default:
-		return msg
-	}
-}
