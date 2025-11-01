@@ -1,7 +1,9 @@
 package repository
 
 import (
+	"context"
 	"errors"
+	"myapp/config"
 	"myapp/internal/models"
 
 	"go.uber.org/zap"
@@ -12,6 +14,7 @@ import (
 type FigureRepository interface {
 	GetAll() ([]models.Figure, error)
 	GetByID(id string) (models.Figure, error)
+	Create(ctx context.Context, figure *models.Figure) error
 }
 
 type figureRepository struct {
@@ -19,10 +22,10 @@ type figureRepository struct {
 	Logger *zap.Logger
 }
 
-func NewFigureRepository(db *gorm.DB, logger *zap.Logger) FigureRepository {
+func NewFigureRepository(mainDependencies *config.MainDependencies) FigureRepository {
 	return &figureRepository{
-		DB:     db,
-		Logger: logger,
+		DB:     mainDependencies.DB,
+		Logger: mainDependencies.Logger,
 	}
 }
 
@@ -52,11 +55,15 @@ func (fr *figureRepository) GetByID(id string) (models.Figure, error) {
 	return figure, nil
 }
 
-func (fr *figureRepository) Create(figure models.Figure) (models.Figure, error) {
-	result := fr.DB.Create(&figure)
-	if result.Error != nil {
-		return figure, result.Error
+func (fr *figureRepository) Create(ctx context.Context, figure *models.Figure) error {
+	err := fr.DB.WithContext(ctx).Create(figure).Error
+	if err != nil {
+		if errors.Is(err, gorm.ErrDuplicatedKey) {
+			return errors.New("figure already exists")
+		}
+
+		return err
 	}
 
-	return figure, nil
+	return nil
 }

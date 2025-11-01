@@ -1,6 +1,7 @@
 server:
   port: :4000
   mode: development
+  query_timeout: 3
 
 database:
   host: postgres

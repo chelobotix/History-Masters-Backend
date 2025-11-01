@@ -1,18 +1,15 @@
 package handlers
 
-import (
-	"go.uber.org/zap"
-	"gorm.io/gorm"
-)
+import "myapp/config"
 
 type HandlersInit struct {
 	Health HealthHandler
 	Figure FigureHandler
 }
 
-func NewHandlersInit(db *gorm.DB, logger *zap.Logger) *HandlersInit {
+func NewHandlersInit(mainDependencies *config.MainDependencies) *HandlersInit {
 	return &HandlersInit{
-		Health: NewHealthHandler(logger),
-		Figure: NewFigureHandler(db, logger),
+		Health: NewHealthHandler(mainDependencies),
+		Figure: NewFigureHandler(mainDependencies),
 	}
 }

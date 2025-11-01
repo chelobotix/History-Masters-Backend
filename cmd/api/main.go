@@ -13,14 +13,14 @@ import (
 func main() {
 	e := echo.New()
 
-	// Config
-	db, logger, cfg, err := config.NewConfig(e)
+	// Initialize Config
+	mainDependencies, err := config.NewConfig(e)
 	if err != nil {
 		log.Panic(err)
 		return
 	}
 
-	routes.ConfigRoutes(e, db, cfg, logger)
+	routes.ConfigRoutes(mainDependencies)
 
 	e.Logger.Fatal(e.Start(viper.GetString("server.port")))
 }

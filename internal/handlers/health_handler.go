@@ -1,6 +1,7 @@
 package handlers
 
 import (
+	"myapp/config"
 	"net/http"
 
 	"github.com/labstack/echo/v4"
@@ -15,9 +16,9 @@ type healthHandler struct {
 	Logger *zap.Logger
 }
 
-func NewHealthHandler(logger *zap.Logger) HealthHandler {
+func NewHealthHandler(mainDependencies *config.MainDependencies) HealthHandler {
 	return &healthHandler{
-		Logger: logger,
+		Logger: mainDependencies.Logger,
 	}
 }
 

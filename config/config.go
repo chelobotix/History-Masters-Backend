@@ -4,6 +4,7 @@ import (
 	"log"
 	"myapp/internal/database"
 	service "myapp/internal/services"
+	"myapp/internal/services/model_validator"
 
 	_ "github.com/joho/godotenv/autoload"
 	"github.com/labstack/echo/v4"
@@ -22,25 +23,43 @@ type Config struct {
 	Database database.DatabaseConfig
 }
 
-func NewConfig(e *echo.Echo) (*gorm.DB, *zap.Logger, *Config, error) {
+type MainDependencies struct {
+	Echo           *echo.Echo
+	DB             *gorm.DB
+	Logger         *zap.Logger
+	Config         *Config
+	ModelValidator model_validator.ModelValidator
+}
+
+func NewConfig(e *echo.Echo) (*MainDependencies, error) {
+	var mainDependencies MainDependencies
 	// Load Viper Config
 	cfg := loadViperConfig()
 
 	// DB Connection
 	db, err := database.NewConnection()
 	if err != nil {
-		return nil, nil, nil, err
+		return &mainDependencies, err
 	}
 
 	// Zap Logger
 	logger, err := service.NewZapLogger(e)
 	if err != nil {
 		log.Panic(err)
-		return nil, nil, nil, err
+		return &mainDependencies, err
 	}
 
-	return db, logger, cfg, nil
+	// Validator
+	modelValidator := model_validator.NewModelValidator()
 
+	// Assign dependencies
+	mainDependencies.Echo = e
+	mainDependencies.DB = db
+	mainDependencies.Logger = logger
+	mainDependencies.Config = cfg
+	mainDependencies.ModelValidator = modelValidator
+
+	return &mainDependencies, nil
 }
 
 func loadViperConfig() *Config {
