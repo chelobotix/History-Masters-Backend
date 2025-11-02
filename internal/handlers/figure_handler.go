@@ -11,6 +11,7 @@ import (
 	"net/http"
 	"time"
 
+	"github.com/jinzhu/copier"
 	"github.com/labstack/echo/v4"
 	"github.com/spf13/viper"
 	"go.uber.org/zap"
@@ -56,9 +57,10 @@ func (fh *figureHandler) GetAll(c echo.Context) error {
 		})
 	}
 
-	return c.JSON(http.StatusOK, map[string]any{
-		"figures": figures,
-	})
+	var figureResponses []models.FigureResponse
+	copier.Copy(&figureResponses, &figures)
+
+	return c.JSON(http.StatusOK, figureResponses)
 }
 
 func (fh *figureHandler) GetById(c echo.Context) error {
@@ -72,9 +74,10 @@ func (fh *figureHandler) GetById(c echo.Context) error {
 		})
 	}
 
-	return c.JSON(http.StatusOK, map[string]any{
-		"figure": figure,
-	})
+	var figureResponse models.FigureResponse
+	copier.Copy(&figureResponse, &figure)
+
+	return c.JSON(http.StatusOK, figureResponse)
 }
 
 func (fh *figureHandler) Create(c echo.Context) error {
@@ -89,7 +92,7 @@ func (fh *figureHandler) Create(c echo.Context) error {
 		ctx = c.Request().Context()
 	}
 
-	figureInput := &models.FigureModelInput{}
+	figureInput := &models.FigureInput{}
 
 	decoder := json.NewDecoder(c.Request().Body)
 	if err := decoder.Decode(&figureInput); err != nil {
