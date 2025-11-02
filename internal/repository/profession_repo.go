@@ -4,31 +4,26 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"myapp/config"
 	"myapp/internal/models"
 
 	"gorm.io/gorm"
 )
 
 type ProfessionRepository interface {
-	GetByID(ctx context.Context, id uint) (models.Profession, error)
-	GetByName(ctx context.Context, name string) (models.Profession, error)
+	GetByID(ctx context.Context, db *gorm.DB, id uint) (models.Profession, error)
+	GetByName(ctx context.Context, db *gorm.DB, name string) (models.Profession, error)
 }
 
-type professionRepository struct {
-	DB *gorm.DB
+type professionRepository struct{}
+
+func NewProfessionRepository() ProfessionRepository {
+	return &professionRepository{}
 }
 
-func NewProfessionRepository(mainDependencies *config.MainDependencies) ProfessionRepository {
-	return &professionRepository{
-		DB: mainDependencies.DB,
-	}
-}
-
-func (pr *professionRepository) GetByID(ctx context.Context, id uint) (models.Profession, error) {
+func (pr *professionRepository) GetByID(ctx context.Context, db *gorm.DB, id uint) (models.Profession, error) {
 	var profession models.Profession
 
-	result := pr.DB.WithContext(ctx).First(&profession, id)
+	result := db.WithContext(ctx).First(&profession, id)
 
 	if errors.Is(result.Error, gorm.ErrRecordNotFound) {
 		return profession, fmt.Errorf("profession with ID %d not found", id)
@@ -41,10 +36,10 @@ func (pr *professionRepository) GetByID(ctx context.Context, id uint) (models.Pr
 	return profession, nil
 }
 
-func (pr *professionRepository) GetByName(ctx context.Context, name string) (models.Profession, error) {
+func (pr *professionRepository) GetByName(ctx context.Context, db *gorm.DB, name string) (models.Profession, error) {
 	var profession models.Profession
 
-	result := pr.DB.WithContext(ctx).Where("name = ?", name).First(&profession)
+	result := db.WithContext(ctx).Where("name = ?", name).First(&profession)
 
 	if errors.Is(result.Error, gorm.ErrRecordNotFound) {
 		return profession, fmt.Errorf("profession with name %s not found", name)

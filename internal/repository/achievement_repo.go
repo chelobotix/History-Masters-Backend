@@ -4,33 +4,28 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"myapp/config"
 	"myapp/internal/models"
 
 	"gorm.io/gorm"
 )
 
 type AchievementRepository interface {
-	GetByIDs(ctx context.Context, id []uint) ([]models.Achievement, error)
-	GetByNames(ctx context.Context, names []string) ([]models.Achievement, error)
-	GetByName(ctx context.Context, name string) (models.Achievement, error)
-	Create(ctx context.Context, achievement *models.Achievement) error
+	GetByIDs(ctx context.Context, db *gorm.DB, id []uint) ([]models.Achievement, error)
+	GetByNames(ctx context.Context, db *gorm.DB, names []string) ([]models.Achievement, error)
+	GetByName(ctx context.Context, db *gorm.DB, name string) (models.Achievement, error)
+	Create(ctx context.Context, db *gorm.DB, achievement *models.Achievement) error
 }
 
-type achievementRepository struct {
-	DB *gorm.DB
+type achievementRepository struct{}
+
+func NewAchievementRepository() AchievementRepository {
+	return &achievementRepository{}
 }
 
-func NewAchievementRepository(mainDependencies *config.MainDependencies) AchievementRepository {
-	return &achievementRepository{
-		DB: mainDependencies.DB,
-	}
-}
-
-func (ar *achievementRepository) GetByIDs(ctx context.Context, ids []uint) ([]models.Achievement, error) {
+func (ar *achievementRepository) GetByIDs(ctx context.Context, db *gorm.DB, ids []uint) ([]models.Achievement, error) {
 	var achievements []models.Achievement
 
-	result := ar.DB.WithContext(ctx).Where("id IN (?)", ids).Find(&achievements)
+	result := db.WithContext(ctx).Where("id IN (?)", ids).Find(&achievements)
 	if result.Error != nil {
 		return achievements, result.Error
 	}
@@ -54,10 +49,10 @@ func (ar *achievementRepository) GetByIDs(ctx context.Context, ids []uint) ([]mo
 	return achievements, nil
 }
 
-func (ar *achievementRepository) GetByNames(ctx context.Context, names []string) ([]models.Achievement, error) {
+func (ar *achievementRepository) GetByNames(ctx context.Context, db *gorm.DB, names []string) ([]models.Achievement, error) {
 	var achievements []models.Achievement
 
-	result := ar.DB.WithContext(ctx).Where("name IN (?)", names).Find(&achievements)
+	result := db.WithContext(ctx).Where("name IN (?)", names).Find(&achievements)
 	if result.Error != nil {
 		return achievements, result.Error
 	}
@@ -81,10 +76,10 @@ func (ar *achievementRepository) GetByNames(ctx context.Context, names []string)
 	return achievements, nil
 }
 
-func (ar *achievementRepository) GetByName(ctx context.Context, name string) (models.Achievement, error) {
+func (ar *achievementRepository) GetByName(ctx context.Context, db *gorm.DB, name string) (models.Achievement, error) {
 	var achievement models.Achievement
 
-	result := ar.DB.WithContext(ctx).Where("name = ?", name).First(&achievement)
+	result := db.WithContext(ctx).Where("name = ?", name).First(&achievement)
 	if errors.Is(result.Error, gorm.ErrRecordNotFound) {
 		return achievement, errors.New("achievement not found")
 	}
@@ -96,8 +91,8 @@ func (ar *achievementRepository) GetByName(ctx context.Context, name string) (mo
 	return achievement, nil
 }
 
-func (ar *achievementRepository) Create(ctx context.Context, achievement *models.Achievement) error {
-	err := ar.DB.WithContext(ctx).Create(achievement).Error
+func (ar *achievementRepository) Create(ctx context.Context, db *gorm.DB, achievement *models.Achievement) error {
+	err := db.WithContext(ctx).Create(achievement).Error
 	if err != nil {
 		if errors.Is(err, gorm.ErrDuplicatedKey) {
 			return errors.New("achievement already exists")

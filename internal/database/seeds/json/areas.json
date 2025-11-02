@@ -1,42 +1,242 @@
 [
-    {"name": "Activism"},
-    {"name": "Architecture"},
-    {"name": "Arts"},
-    {"name": "Aviation"},
-    {"name": "Business"},
-    {"name": "Comedy"},
-    {"name": "Culinary Arts"},
-    {"name": "Dance"},
-    {"name": "Diplomacy"},
-    {"name": "Economics"},
-    {"name": "Education"},
-    {"name": "Engineering"},
-    {"name": "Entertainment"},
-    {"name": "Entrepreneurship"},
-    {"name": "Exploration"},
-    {"name": "Fashion"},
-    {"name": "Film"},
-    {"name": "Humanitarian"},
-    {"name": "Journalism"},
-    {"name": "Law"},
-    {"name": "Leadership"},
-    {"name": "Literature"},
-    {"name": "Mathematics"},
-    {"name": "Medicine"},
-    {"name": "Military"},
-    {"name": "Music"},
-    {"name": "Philanthropy"},
-    {"name": "Philosophy"},
-    {"name": "Photography"},
-    {"name": "Politics"},
-    {"name": "Psychology"},
-    {"name": "Religion"},
-    {"name": "Science"},
-    {"name": "Social Reform"},
-    {"name": "Space"},
-    {"name": "Sports"},
-    {"name": "Technology"},
-    {"name": "Television"},
-    {"name": "Theater"},
-    {"name": "Visual Arts"}
+    {
+        "name": "Activism",
+        "name_es": "Activismo",
+        "description": "Efforts to promote, impede, or direct social, political, economic, or environmental reform with the desire to make changes in society.",
+        "description_es": "Esfuerzos para promover, impedir o dirigir reformas sociales, políticas, económicas o ambientales con el deseo de generar cambios en la sociedad."
+    },
+    {
+        "name": "Architecture",
+        "name_es": "Arquitectura",
+        "description": "Art and science of designing and constructing buildings and other physical structures.",
+        "description_es": "Arte y ciencia de diseñar y construir edificios y otras estructuras físicas."
+    },
+    {
+        "name": "Arts",
+        "name_es": "Artes",
+        "description": "Creative expression through various forms including painting, sculpture, and other visual media.",
+        "description_es": "Expresión creativa a través de diversas formas incluyendo pintura, escultura y otros medios visuales."
+    },
+    {
+        "name": "Aviation",
+        "name_es": "Aviación",
+        "description": "Design, development, production, operation, and use of aircraft.",
+        "description_es": "Diseño, desarrollo, producción, operación y uso de aeronaves."
+    },
+    {
+        "name": "Business",
+        "name_es": "Negocios",
+        "description": "Commercial, industrial, or professional activities related to trade and commerce.",
+        "description_es": "Actividades comerciales, industriales o profesionales relacionadas con el comercio."
+    },
+    {
+        "name": "Comedy",
+        "name_es": "Comedia",
+        "description": "Entertainment designed to make people laugh through humor and wit.",
+        "description_es": "Entretenimiento diseñado para hacer reír a las personas mediante el humor e ingenio."
+    },
+    {
+        "name": "Culinary Arts",
+        "name_es": "Artes Culinarias",
+        "description": "Art of preparing and cooking food, including techniques and presentation.",
+        "description_es": "Arte de preparar y cocinar alimentos, incluyendo técnicas y presentación."
+    },
+    {
+        "name": "Dance",
+        "name_es": "Danza",
+        "description": "Performing art consisting of sequences of movement, often to music.",
+        "description_es": "Arte escénico que consiste en secuencias de movimiento, generalmente con música."
+    },
+    {
+        "name": "Diplomacy",
+        "name_es": "Diplomacia",
+        "description": "Practice of conducting negotiations and maintaining relations between nations.",
+        "description_es": "Práctica de conducir negociaciones y mantener relaciones entre naciones."
+    },
+    {
+        "name": "Economics",
+        "name_es": "Economía",
+        "description": "Study of production, distribution, and consumption of goods and services.",
+        "description_es": "Estudio de la producción, distribución y consumo de bienes y servicios."
+    },
+    {
+        "name": "Education",
+        "name_es": "Educación",
+        "description": "Process of facilitating learning, knowledge, skills, values, and habits.",
+        "description_es": "Proceso de facilitar el aprendizaje, conocimiento, habilidades, valores y hábitos."
+    },
+    {
+        "name": "Engineering",
+        "name_es": "Ingeniería",
+        "description": "Application of science and mathematics to design and build structures, machines, and systems.",
+        "description_es": "Aplicación de la ciencia y las matemáticas para diseñar y construir estructuras, máquinas y sistemas."
+    },
+    {
+        "name": "Entertainment",
+        "name_es": "Entretenimiento",
+        "description": "Activities and performances designed to amuse and engage audiences.",
+        "description_es": "Actividades y presentaciones diseñadas para divertir y cautivar audiencias."
+    },
+    {
+        "name": "Entrepreneurship",
+        "name_es": "Emprendimiento",
+        "description": "Creation and management of new business ventures and innovations.",
+        "description_es": "Creación y gestión de nuevos emprendimientos comerciales e innovaciones."
+    },
+    {
+        "name": "Exploration",
+        "name_es": "Exploración",
+        "description": "Discovery and investigation of unknown territories and frontiers.",
+        "description_es": "Descubrimiento e investigación de territorios y fronteras desconocidas."
+    },
+    {
+        "name": "Fashion",
+        "name_es": "Moda",
+        "description": "Design and creation of clothing, accessories, and style trends.",
+        "description_es": "Diseño y creación de ropa, accesorios y tendencias de estilo."
+    },
+    {
+        "name": "Film",
+        "name_es": "Cine",
+        "description": "Art of creating motion pictures and cinematographic works.",
+        "description_es": "Arte de crear películas y obras cinematográficas."
+    },
+    {
+        "name": "Humanitarian",
+        "name_es": "Humanitario",
+        "description": "Efforts to promote human welfare and alleviate suffering.",
+        "description_es": "Esfuerzos para promover el bienestar humano y aliviar el sufrimiento."
+    },
+    {
+        "name": "Journalism",
+        "name_es": "Periodismo",
+        "description": "Collection, preparation, and distribution of news and information.",
+        "description_es": "Recopilación, preparación y distribución de noticias e información."
+    },
+    {
+        "name": "Law",
+        "name_es": "Derecho",
+        "description": "System of rules and regulations enforced through social institutions.",
+        "description_es": "Sistema de reglas y regulaciones aplicadas a través de instituciones sociales."
+    },
+    {
+        "name": "Leadership",
+        "name_es": "Liderazgo",
+        "description": "Ability to guide, influence, and direct individuals or organizations.",
+        "description_es": "Habilidad de guiar, influir y dirigir individuos u organizaciones."
+    },
+    {
+        "name": "Literature",
+        "name_es": "Literatura",
+        "description": "Written works of artistic merit including novels, poetry, and essays.",
+        "description_es": "Obras escritas de mérito artístico incluyendo novelas, poesía y ensayos."
+    },
+    {
+        "name": "Mathematics",
+        "name_es": "Matemáticas",
+        "description": "Study of numbers, quantities, structures, and patterns.",
+        "description_es": "Estudio de números, cantidades, estructuras y patrones."
+    },
+    {
+        "name": "Medicine",
+        "name_es": "Medicina",
+        "description": "Science and practice of diagnosis, treatment, and prevention of disease.",
+        "description_es": "Ciencia y práctica del diagnóstico, tratamiento y prevención de enfermedades."
+    },
+    {
+        "name": "Military",
+        "name_es": "Militar",
+        "description": "Armed forces and activities related to defense and warfare.",
+        "description_es": "Fuerzas armadas y actividades relacionadas con la defensa y la guerra."
+    },
+    {
+        "name": "Music",
+        "name_es": "Música",
+        "description": "Art of arranging sounds in time to create composition through melody, harmony, and rhythm.",
+        "description_es": "Arte de organizar sonidos en el tiempo para crear composición mediante melodía, armonía y ritmo."
+    },
+    {
+        "name": "Philanthropy",
+        "name_es": "Filantropía",
+        "description": "Charitable giving and actions to promote the welfare of others.",
+        "description_es": "Donaciones benéficas y acciones para promover el bienestar de otros."
+    },
+    {
+        "name": "Philosophy",
+        "name_es": "Filosofía",
+        "description": "Study of fundamental questions about existence, knowledge, values, and reason.",
+        "description_es": "Estudio de preguntas fundamentales sobre existencia, conocimiento, valores y razón."
+    },
+    {
+        "name": "Photography",
+        "name_es": "Fotografía",
+        "description": "Art and practice of creating images by recording light.",
+        "description_es": "Arte y práctica de crear imágenes mediante la captura de luz."
+    },
+    {
+        "name": "Politics",
+        "name_es": "Política",
+        "description": "Activities associated with governance and decision-making in groups.",
+        "description_es": "Actividades asociadas con el gobierno y la toma de decisiones en grupos."
+    },
+    {
+        "name": "Psychology",
+        "name_es": "Psicología",
+        "description": "Scientific study of mind, behavior, and mental processes.",
+        "description_es": "Estudio científico de la mente, comportamiento y procesos mentales."
+    },
+    {
+        "name": "Religion",
+        "name_es": "Religión",
+        "description": "Systems of faith, worship, and spiritual beliefs.",
+        "description_es": "Sistemas de fe, adoración y creencias espirituales."
+    },
+    {
+        "name": "Science",
+        "name_es": "Ciencia",
+        "description": "Systematic study of the natural world through observation and experimentation.",
+        "description_es": "Estudio sistemático del mundo natural mediante observación y experimentación."
+    },
+    {
+        "name": "Social Reform",
+        "name_es": "Reforma Social",
+        "description": "Efforts to improve society by addressing social injustices and inequalities.",
+        "description_es": "Esfuerzos para mejorar la sociedad abordando injusticias y desigualdades sociales."
+    },
+    {
+        "name": "Space",
+        "name_es": "Espacio",
+        "description": "Exploration and study of outer space and celestial bodies.",
+        "description_es": "Exploración y estudio del espacio exterior y cuerpos celestes."
+    },
+    {
+        "name": "Sports",
+        "name_es": "Deportes",
+        "description": "Physical activities and competitive games requiring skill and athleticism.",
+        "description_es": "Actividades físicas y juegos competitivos que requieren habilidad y atletismo."
+    },
+    {
+        "name": "Technology",
+        "name_es": "Tecnología",
+        "description": "Application of scientific knowledge for practical purposes and innovation.",
+        "description_es": "Aplicación del conocimiento científico para propósitos prácticos e innovación."
+    },
+    {
+        "name": "Television",
+        "name_es": "Televisión",
+        "description": "Medium for transmitting moving images and creating broadcast content.",
+        "description_es": "Medio para transmitir imágenes en movimiento y crear contenido audiovisual."
+    },
+    {
+        "name": "Theater",
+        "name_es": "Teatro",
+        "description": "Performing art involving live presentations of stories through acting.",
+        "description_es": "Arte escénico que involucra presentaciones en vivo de historias mediante actuación."
+    },
+    {
+        "name": "Visual Arts",
+        "name_es": "Artes Visuales",
+        "description": "Art forms that create works primarily visual in nature, including painting and drawing.",
+        "description_es": "Formas artísticas que crean obras principalmente de naturaleza visual, incluyendo pintura y dibujo."
+    }
 ]

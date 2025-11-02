@@ -1,60 +1,350 @@
 [
-    {"name": "Activist"},
-    {"name": "Actor"},
-    {"name": "Architect"},
-    {"name": "Artist"},
-    {"name": "Astronaut"},
-    {"name": "Astronomer"},
-    {"name": "Athlete"},
-    {"name": "Author"},
-    {"name": "Biologist"},
-    {"name": "Businessman"},
-    {"name": "Chemist"},
-    {"name": "Comedian"},
-    {"name": "Composer"},
-    {"name": "Dancer"},
-    {"name": "Designer"},
-    {"name": "Diplomat"},
-    {"name": "Director"},
-    {"name": "Economist"},
-    {"name": "Educator"},
-    {"name": "Engineer"},
-    {"name": "Entrepreneur"},
-    {"name": "Explorer"},
-    {"name": "Fashion Designer"},
-    {"name": "Film Producer"},
-    {"name": "Historian"},
-    {"name": "Influencer"},
-    {"name": "Inventor"},
-    {"name": "Journalist"},
-    {"name": "Judge"},
-    {"name": "Lawyer"},
-    {"name": "Mathematician"},
-    {"name": "Military"},
-    {"name": "Model"},
-    {"name": "Musician"},
-    {"name": "Painter"},
-    {"name": "Philanthropist"},
-    {"name": "Philosopher"},
-    {"name": "Photographer"},
-    {"name": "Physician"},
-    {"name": "Physicist"},
-    {"name": "Poet"},
-    {"name": "Politician"},
-    {"name": "Producer"},
-    {"name": "Psychologist"},
-    {"name": "Religious Leader"},
-    {"name": "Revolutionary"},
-    {"name": "Scientist"},
-    {"name": "Screenwriter"},
-    {"name": "Sculptor"},
-    {"name": "Singer"},
-    {"name": "Social Reformer"},
-    {"name": "Sociologist"},
-    {"name": "Software Developer"},
-    {"name": "Spiritual Leader"},
-    {"name": "Sportsperson"},
-    {"name": "Surgeon"},
-    {"name": "Teacher"},
-    {"name": "Writer"}
+    {
+        "name": "Activist",
+        "name_es": "Activista",
+        "description": "Person who campaigns to bring about political or social change.",
+        "description_es": "Persona que hace campaña para lograr cambios políticos o sociales."
+    },
+    {
+        "name": "Actor",
+        "name_es": "Actor",
+        "description": "Person who performs in plays, movies, television, or other media.",
+        "description_es": "Persona que actúa en obras de teatro, películas, televisión u otros medios."
+    },
+    {
+        "name": "Architect",
+        "name_es": "Arquitecto",
+        "description": "Professional who designs buildings and oversees their construction.",
+        "description_es": "Profesional que diseña edificios y supervisa su construcción."
+    },
+    {
+        "name": "Artist",
+        "name_es": "Artista",
+        "description": "Person who creates art through various mediums and creative expression.",
+        "description_es": "Persona que crea arte a través de diversos medios y expresión creativa."
+    },
+    {
+        "name": "Astronaut",
+        "name_es": "Astronauta",
+        "description": "Person trained to travel and work in space.",
+        "description_es": "Persona entrenada para viajar y trabajar en el espacio."
+    },
+    {
+        "name": "Astronomer",
+        "name_es": "Astrónomo",
+        "description": "Scientist who studies celestial objects and phenomena in the universe.",
+        "description_es": "Científico que estudia objetos celestes y fenómenos del universo."
+    },
+    {
+        "name": "Athlete",
+        "name_es": "Atleta",
+        "description": "Person proficient in sports and physical exercise.",
+        "description_es": "Persona competente en deportes y ejercicio físico."
+    },
+    {
+        "name": "Author",
+        "name_es": "Autor",
+        "description": "Person who writes books, articles, or other written works.",
+        "description_es": "Persona que escribe libros, artículos u otras obras escritas."
+    },
+    {
+        "name": "Biologist",
+        "name_es": "Biólogo",
+        "description": "Scientist who studies living organisms and their relationships.",
+        "description_es": "Científico que estudia organismos vivos y sus relaciones."
+    },
+    {
+        "name": "Businessman",
+        "name_es": "Empresario",
+        "description": "Person engaged in commercial or industrial business activities.",
+        "description_es": "Persona dedicada a actividades comerciales o industriales."
+    },
+    {
+        "name": "Chemist",
+        "name_es": "Químico",
+        "description": "Scientist who studies the composition and properties of matter.",
+        "description_es": "Científico que estudia la composición y propiedades de la materia."
+    },
+    {
+        "name": "Comedian",
+        "name_es": "Comediante",
+        "description": "Entertainer who performs comedy to make audiences laugh.",
+        "description_es": "Artista que hace comedia para hacer reír al público."
+    },
+    {
+        "name": "Composer",
+        "name_es": "Compositor",
+        "description": "Person who creates musical compositions and arrangements.",
+        "description_es": "Persona que crea composiciones y arreglos musicales."
+    },
+    {
+        "name": "Dancer",
+        "name_es": "Bailarín",
+        "description": "Performer who expresses ideas and emotions through movement.",
+        "description_es": "Artista que expresa ideas y emociones a través del movimiento."
+    },
+    {
+        "name": "Designer",
+        "name_es": "Diseñador",
+        "description": "Professional who plans and creates visual or functional designs.",
+        "description_es": "Profesional que planifica y crea diseños visuales o funcionales."
+    },
+    {
+        "name": "Diplomat",
+        "name_es": "Diplomático",
+        "description": "Official who represents and negotiates on behalf of a country.",
+        "description_es": "Funcionario que representa y negocia en nombre de un país."
+    },
+    {
+        "name": "Director",
+        "name_es": "Director",
+        "description": "Person who oversees and guides creative or organizational projects.",
+        "description_es": "Persona que supervisa y guía proyectos creativos u organizacionales."
+    },
+    {
+        "name": "Economist",
+        "name_es": "Economista",
+        "description": "Expert who studies production, distribution, and consumption of resources.",
+        "description_es": "Experto que estudia la producción, distribución y consumo de recursos."
+    },
+    {
+        "name": "Educator",
+        "name_es": "Educador",
+        "description": "Professional who teaches and facilitates learning.",
+        "description_es": "Profesional que enseña y facilita el aprendizaje."
+    },
+    {
+        "name": "Engineer",
+        "name_es": "Ingeniero",
+        "description": "Professional who applies scientific principles to design and build systems.",
+        "description_es": "Profesional que aplica principios científicos para diseñar y construir sistemas."
+    },
+    {
+        "name": "Entrepreneur",
+        "name_es": "Emprendedor",
+        "description": "Person who starts and manages new business ventures.",
+        "description_es": "Persona que inicia y gestiona nuevos emprendimientos comerciales."
+    },
+    {
+        "name": "Explorer",
+        "name_es": "Explorador",
+        "description": "Person who travels to discover new places and knowledge.",
+        "description_es": "Persona que viaja para descubrir nuevos lugares y conocimiento."
+    },
+    {
+        "name": "Fashion Designer",
+        "name_es": "Diseñador de Moda",
+        "description": "Professional who creates clothing and accessories designs.",
+        "description_es": "Profesional que crea diseños de ropa y accesorios."
+    },
+    {
+        "name": "Film Producer",
+        "name_es": "Productor de Cine",
+        "description": "Person who oversees and manages film production projects.",
+        "description_es": "Persona que supervisa y gestiona proyectos de producción cinematográfica."
+    },
+    {
+        "name": "Historian",
+        "name_es": "Historiador",
+        "description": "Scholar who studies and writes about past events and civilizations.",
+        "description_es": "Académico que estudia y escribe sobre eventos pasados y civilizaciones."
+    },
+    {
+        "name": "Influencer",
+        "name_es": "Influencer",
+        "description": "Person who affects opinions and behaviors through social media presence.",
+        "description_es": "Persona que influye en opiniones y comportamientos a través de redes sociales."
+    },
+    {
+        "name": "Inventor",
+        "name_es": "Inventor",
+        "description": "Person who creates new devices, processes, or methods.",
+        "description_es": "Persona que crea nuevos dispositivos, procesos o métodos."
+    },
+    {
+        "name": "Journalist",
+        "name_es": "Periodista",
+        "description": "Professional who collects, writes, and reports news and information.",
+        "description_es": "Profesional que recopila, escribe y reporta noticias e información."
+    },
+    {
+        "name": "Judge",
+        "name_es": "Juez",
+        "description": "Official who presides over court proceedings and makes legal decisions.",
+        "description_es": "Funcionario que preside procedimientos judiciales y toma decisiones legales."
+    },
+    {
+        "name": "Lawyer",
+        "name_es": "Abogado",
+        "description": "Professional who practices law and represents clients in legal matters.",
+        "description_es": "Profesional que practica el derecho y representa clientes en asuntos legales."
+    },
+    {
+        "name": "Mathematician",
+        "name_es": "Matemático",
+        "description": "Expert who studies numbers, quantities, and abstract structures.",
+        "description_es": "Experto que estudia números, cantidades y estructuras abstractas."
+    },
+    {
+        "name": "Military",
+        "name_es": "Militar",
+        "description": "Member of armed forces who serves in defense operations.",
+        "description_es": "Miembro de las fuerzas armadas que sirve en operaciones de defensa."
+    },
+    {
+        "name": "Model",
+        "name_es": "Modelo",
+        "description": "Person who poses for photographs, fashion shows, or artistic purposes.",
+        "description_es": "Persona que posa para fotografías, desfiles de moda o propósitos artísticos."
+    },
+    {
+        "name": "Musician",
+        "name_es": "Músico",
+        "description": "Person who performs or creates music professionally.",
+        "description_es": "Persona que interpreta o crea música profesionalmente."
+    },
+    {
+        "name": "Painter",
+        "name_es": "Pintor",
+        "description": "Artist who creates visual art using paints on various surfaces.",
+        "description_es": "Artista que crea arte visual usando pinturas sobre diversas superficies."
+    },
+    {
+        "name": "Philanthropist",
+        "name_es": "Filántropo",
+        "description": "Person who donates time, money, or resources to help others.",
+        "description_es": "Persona que dona tiempo, dinero o recursos para ayudar a otros."
+    },
+    {
+        "name": "Philosopher",
+        "name_es": "Filósofo",
+        "description": "Thinker who studies fundamental questions about existence and knowledge.",
+        "description_es": "Pensador que estudia preguntas fundamentales sobre existencia y conocimiento."
+    },
+    {
+        "name": "Photographer",
+        "name_es": "Fotógrafo",
+        "description": "Professional who captures images using cameras and photographic equipment.",
+        "description_es": "Profesional que captura imágenes usando cámaras y equipo fotográfico."
+    },
+    {
+        "name": "Physician",
+        "name_es": "Médico",
+        "description": "Medical doctor who diagnoses and treats illnesses and injuries.",
+        "description_es": "Doctor que diagnostica y trata enfermedades y lesiones."
+    },
+    {
+        "name": "Physicist",
+        "name_es": "Físico",
+        "description": "Scientist who studies matter, energy, and fundamental forces of nature.",
+        "description_es": "Científico que estudia materia, energía y fuerzas fundamentales de la naturaleza."
+    },
+    {
+        "name": "Poet",
+        "name_es": "Poeta",
+        "description": "Writer who composes poetry using rhythmic and metaphorical language.",
+        "description_es": "Escritor que compone poesía usando lenguaje rítmico y metafórico."
+    },
+    {
+        "name": "Politician",
+        "name_es": "Político",
+        "description": "Person involved in government and public policy making.",
+        "description_es": "Persona involucrada en gobierno y elaboración de políticas públicas."
+    },
+    {
+        "name": "Producer",
+        "name_es": "Productor",
+        "description": "Professional who oversees creative and financial aspects of media projects.",
+        "description_es": "Profesional que supervisa aspectos creativos y financieros de proyectos mediáticos."
+    },
+    {
+        "name": "Psychologist",
+        "name_es": "Psicólogo",
+        "description": "Professional who studies human behavior and mental processes.",
+        "description_es": "Profesional que estudia el comportamiento humano y procesos mentales."
+    },
+    {
+        "name": "Religious Leader",
+        "name_es": "Líder Religioso",
+        "description": "Person who guides and teaches followers in matters of faith.",
+        "description_es": "Persona que guía y enseña a seguidores en asuntos de fe."
+    },
+    {
+        "name": "Revolutionary",
+        "name_es": "Revolucionario",
+        "description": "Person who advocates or engages in political revolution.",
+        "description_es": "Persona que promueve o participa en revolución política."
+    },
+    {
+        "name": "Scientist",
+        "name_es": "Científico",
+        "description": "Professional who conducts research to advance knowledge in various fields.",
+        "description_es": "Profesional que realiza investigaciones para avanzar el conocimiento en diversos campos."
+    },
+    {
+        "name": "Screenwriter",
+        "name_es": "Guionista",
+        "description": "Writer who creates scripts for films, television, or other media.",
+        "description_es": "Escritor que crea guiones para cine, televisión u otros medios."
+    },
+    {
+        "name": "Sculptor",
+        "name_es": "Escultor",
+        "description": "Artist who creates three-dimensional artworks from various materials.",
+        "description_es": "Artista que crea obras de arte tridimensionales de diversos materiales."
+    },
+    {
+        "name": "Singer",
+        "name_es": "Cantante",
+        "description": "Performer who produces musical sounds with their voice.",
+        "description_es": "Artista que produce sonidos musicales con su voz."
+    },
+    {
+        "name": "Social Reformer",
+        "name_es": "Reformador Social",
+        "description": "Person who works to improve society through systematic change.",
+        "description_es": "Persona que trabaja para mejorar la sociedad mediante cambios sistemáticos."
+    },
+    {
+        "name": "Sociologist",
+        "name_es": "Sociólogo",
+        "description": "Scholar who studies human society and social behavior.",
+        "description_es": "Académico que estudia la sociedad humana y el comportamiento social."
+    },
+    {
+        "name": "Software Developer",
+        "name_es": "Desarrollador de Software",
+        "description": "Professional who designs, creates, and maintains computer programs.",
+        "description_es": "Profesional que diseña, crea y mantiene programas informáticos."
+    },
+    {
+        "name": "Spiritual Leader",
+        "name_es": "Líder Espiritual",
+        "description": "Person who provides guidance in spiritual and philosophical matters.",
+        "description_es": "Persona que brinda orientación en asuntos espirituales y filosóficos."
+    },
+    {
+        "name": "Sportsperson",
+        "name_es": "Deportista",
+        "description": "Individual who competes professionally in sports.",
+        "description_es": "Individuo que compite profesionalmente en deportes."
+    },
+    {
+        "name": "Surgeon",
+        "name_es": "Cirujano",
+        "description": "Medical specialist who performs surgical operations.",
+        "description_es": "Especialista médico que realiza operaciones quirúrgicas."
+    },
+    {
+        "name": "Teacher",
+        "name_es": "Profesor",
+        "description": "Educator who instructs students in academic subjects.",
+        "description_es": "Educador que instruye a estudiantes en materias académicas."
+    },
+    {
+        "name": "Writer",
+        "name_es": "Escritor",
+        "description": "Person who creates written content across various genres and formats.",
+        "description_es": "Persona que crea contenido escrito en diversos géneros y formatos."
+    }
 ]

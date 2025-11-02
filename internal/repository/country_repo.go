@@ -4,31 +4,26 @@ import (
 	"context"
 	"errors"
 	"fmt"
-	"myapp/config"
 	"myapp/internal/models"
 
 	"gorm.io/gorm"
 )
 
 type CountryRepository interface {
-	GetByID(ctx context.Context, id uint) (models.Country, error)
-	GetByISOCode(ctx context.Context, isoCode string) (models.Country, error)
+	GetByID(ctx context.Context, db *gorm.DB, id uint) (models.Country, error)
+	GetByName(ctx context.Context, db *gorm.DB, name string) (models.Country, error)
 }
 
-type countryRepository struct {
-	DB *gorm.DB
+type countryRepository struct{}
+
+func NewCountryRepository() CountryRepository {
+	return &countryRepository{}
 }
 
-func NewCountryRepository(mainDependencies *config.MainDependencies) CountryRepository {
-	return &countryRepository{
-		DB: mainDependencies.DB,
-	}
-}
-
-func (cr *countryRepository) GetByID(ctx context.Context, id uint) (models.Country, error) {
+func (cr *countryRepository) GetByID(ctx context.Context, db *gorm.DB, id uint) (models.Country, error) {
 	var country models.Country
 
-	result := cr.DB.WithContext(ctx).Find(&country, id)
+	result := db.WithContext(ctx).Find(&country, id)
 	if errors.Is(result.Error, gorm.ErrRecordNotFound) {
 		return country, fmt.Errorf("country with ID %d not found", id)
 	}
@@ -40,12 +35,12 @@ func (cr *countryRepository) GetByID(ctx context.Context, id uint) (models.Count
 	return country, nil
 }
 
-func (cr *countryRepository) GetByISOCode(ctx context.Context, isoCode string) (models.Country, error) {
+func (cr *countryRepository) GetByName(ctx context.Context, db *gorm.DB, name string) (models.Country, error) {
 	var country models.Country
 
-	result := cr.DB.WithContext(ctx).Where("iso_code = ?", isoCode).First(&country)
+	result := db.WithContext(ctx).Where("name = ?", name).First(&country)
 	if errors.Is(result.Error, gorm.ErrRecordNotFound) {
-		return country, fmt.Errorf("country with ISO code %s not found", isoCode)
+		return country, fmt.Errorf("country with name %s not found", name)
 	}
 
 	if result.Error != nil {

@@ -11,7 +11,6 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/jinzhu/copier"
 	"github.com/labstack/echo/v4"
 	"github.com/spf13/viper"
 	"go.uber.org/zap"
@@ -40,7 +39,7 @@ func NewFigureHandler(mainDependencies *config.MainDependencies) FigureHandler {
 	return &figureHandler{
 		DB:             mainDependencies.DB,
 		Logger:         mainDependencies.Logger,
-		Repository:     repository.NewFigureRepository(mainDependencies),
+		Repository:     repository.NewFigureRepository(),
 		ModelValidator: mainDependencies.ModelValidator,
 		Services: Services{
 			CreateFigureService: services.NewCreateFigureService(mainDependencies),
@@ -49,35 +48,26 @@ func NewFigureHandler(mainDependencies *config.MainDependencies) FigureHandler {
 }
 
 func (fh *figureHandler) GetAll(c echo.Context) error {
-	figures, err := fh.Repository.GetAll()
+	ctx := c.Request().Context()
+
+	figures, err := fh.Repository.GetAll(ctx, fh.DB)
 	if err != nil {
-		return c.JSON(http.StatusBadRequest, map[string]any{
-			"error":   true,
-			"details": err.Error(),
-		})
+		return ErrorHandler(c, err, http.StatusBadRequest)
 	}
 
-	var figureResponses []models.FigureResponse
-	copier.Copy(&figureResponses, &figures)
-
-	return c.JSON(http.StatusOK, figureResponses)
+	return c.JSON(http.StatusOK, figures)
 }
 
 func (fh *figureHandler) GetById(c echo.Context) error {
 	id := c.Param("id")
+	ctx := c.Request().Context()
 
-	figure, err := fh.Repository.GetByID(id)
+	figure, err := fh.Repository.GetByID(ctx, fh.DB, id)
 	if err != nil {
-		return c.JSON(http.StatusBadRequest, map[string]any{
-			"error":   true,
-			"details": err.Error(),
-		})
+		return ErrorHandler(c, err, http.StatusBadRequest)
 	}
 
-	var figureResponse models.FigureResponse
-	copier.Copy(&figureResponse, &figure)
-
-	return c.JSON(http.StatusOK, figureResponse)
+	return c.JSON(http.StatusOK, figure)
 }
 
 func (fh *figureHandler) Create(c echo.Context) error {

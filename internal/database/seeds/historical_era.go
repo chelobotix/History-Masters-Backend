@@ -17,11 +17,11 @@ func HistoricalEraSeeds(db *gorm.DB) error {
 	}
 
 	var historicalEra = []models.HistoricalEra{
-		{Name: "Classical Era"},
-		{Name: "Early Modernd Era"},
-		{Name: "Prehistory"},
-		{Name: "The Middle Age"},
-		{Name: "Modern Era"},
+		{Name: "Classical Era", NameEs: "Era Clásica"},
+		{Name: "Early Modernd Era", NameEs: "Era Temprana Moderna"},
+		{Name: "Prehistory", NameEs: "Prehistoria"},
+		{Name: "The Middle Age", NameEs: "Edad Media"},
+		{Name: "Modern Era", NameEs: "Era Moderna"},
 	}
 
 	if err := db.Create(&historicalEra).Error; err != nil {

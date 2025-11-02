@@ -11,7 +11,7 @@ import (
 
 type CreateFigureService interface {
 	CreateFigure(ctx context.Context, fmi *models.FigureInput) (*models.Figure, error)
-	handleAchievements(ctx context.Context, achievements []string) ([]models.Achievement, error)
+	handleAchievements(ctx context.Context, db *gorm.DB, achievements []string) ([]models.Achievement, error)
 }
 
 type createFigureService struct {
@@ -28,13 +28,13 @@ type createFigureService struct {
 func NewCreateFigureService(mainDependencies *config.MainDependencies) CreateFigureService {
 	return &createFigureService{
 		DB:                      mainDependencies.DB,
-		YearRepository:          repository.NewYearRepository(mainDependencies),
-		CountryRepository:       repository.NewCountryRepository(mainDependencies),
-		HistoricalEraRepository: repository.NewHistoricalEraRepository(mainDependencies),
-		AreaRepository:          repository.NewAreaRepository(mainDependencies),
-		ProfessionRepository:    repository.NewProfessionRepository(mainDependencies),
-		AchievementRepository:   repository.NewAchievementRepository(mainDependencies),
-		FigureRepository:        repository.NewFigureRepository(mainDependencies),
+		YearRepository:          repository.NewYearRepository(),
+		CountryRepository:       repository.NewCountryRepository(),
+		HistoricalEraRepository: repository.NewHistoricalEraRepository(),
+		AreaRepository:          repository.NewAreaRepository(),
+		ProfessionRepository:    repository.NewProfessionRepository(),
+		AchievementRepository:   repository.NewAchievementRepository(),
+		FigureRepository:        repository.NewFigureRepository(),
 	}
 }
 
@@ -42,37 +42,37 @@ func (s *createFigureService) CreateFigure(ctx context.Context, fmi *models.Figu
 	var newFigure *models.Figure
 
 	err := s.DB.Transaction(func(tx *gorm.DB) error {
-		yearOfBirth, err := s.YearRepository.GetByYear(ctx, fmi.YearOfBirth)
+		yearOfBirth, err := s.YearRepository.GetByYear(ctx, tx, fmi.YearOfBirth)
 		if err != nil {
 			return err
 		}
 
-		yearOfDeath, err := s.YearRepository.GetByYear(ctx, fmi.YearOfDeath)
+		yearOfDeath, err := s.YearRepository.GetByYear(ctx, tx, fmi.YearOfDeath)
 		if err != nil {
 			return err
 		}
 
-		country, err := s.CountryRepository.GetByISOCode(ctx, fmi.CountryISOCode)
+		country, err := s.CountryRepository.GetByName(ctx, tx, fmi.CountryISOCode)
 		if err != nil {
 			return err
 		}
 
-		historicalEra, err := s.HistoricalEraRepository.GetByName(ctx, fmi.HistoricalEra)
+		historicalEra, err := s.HistoricalEraRepository.GetByName(ctx, tx, fmi.HistoricalEra)
 		if err != nil {
 			return err
 		}
 
-		areas, err := s.AreaRepository.GetByNames(ctx, fmi.Areas)
+		areas, err := s.AreaRepository.GetByNames(ctx, tx, fmi.Areas)
 		if err != nil {
 			return err
 		}
 
-		profession, err := s.ProfessionRepository.GetByName(ctx, fmi.Profession)
+		profession, err := s.ProfessionRepository.GetByName(ctx, tx, fmi.Profession)
 		if err != nil {
 			return err
 		}
 
-		achievements, err := s.handleAchievements(ctx, fmi.Achievements)
+		achievements, err := s.handleAchievements(ctx, tx, fmi.Achievements)
 		if err != nil {
 			return err
 		}
@@ -89,7 +89,7 @@ func (s *createFigureService) CreateFigure(ctx context.Context, fmi *models.Figu
 			Achievements:  achievements,
 		}
 
-		err = s.FigureRepository.Create(ctx, newFigure)
+		err = s.FigureRepository.Create(ctx, tx, newFigure)
 		if err != nil {
 			return err
 		}
@@ -104,11 +104,11 @@ func (s *createFigureService) CreateFigure(ctx context.Context, fmi *models.Figu
 	return newFigure, nil
 }
 
-func (s *createFigureService) handleAchievements(ctx context.Context, achievementNames []string) ([]models.Achievement, error) {
+func (s *createFigureService) handleAchievements(ctx context.Context, db *gorm.DB, achievementNames []string) ([]models.Achievement, error) {
 	var foundAchievements []models.Achievement
 
 	for _, achievementName := range achievementNames {
-		achievement, err := s.AchievementRepository.GetByName(ctx, achievementName)
+		achievement, err := s.AchievementRepository.GetByName(ctx, db, achievementName)
 
 		if err != nil {
 			if err.Error() == "achievement not found" {
@@ -116,7 +116,7 @@ func (s *createFigureService) handleAchievements(ctx context.Context, achievemen
 					Name: achievementName,
 				}
 
-				err = s.AchievementRepository.Create(ctx, newAchievement)
+				err = s.AchievementRepository.Create(ctx, db, newAchievement)
 				if err != nil {
 					return foundAchievements, err
 				}
